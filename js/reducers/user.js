@@ -1,8 +1,14 @@
+import { fetchUserList } from "../lib/api.js";
 import { actionCreator } from "../lib/redux.js";
 
 const USER_INIT = "USER_INIT";
 
-export const initUser = todos => actionCreator(USER_INIT, { todos });
+export const initUser = () => dispatch =>
+  fetchUserList()
+    .then(response => {
+      dispatch(actionCreator(USER_INIT, { users: response }));
+    })
+    .catch(error => console.error(error));
 
 const initialState = {
   users: [],
