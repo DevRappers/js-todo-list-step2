@@ -4,8 +4,3 @@ export const createRandomId = () =>
       v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
-
-export const loggerMiddleware = store => next => action => {
-  console.log("logger: ", action.type);
-  next(action);
-};
