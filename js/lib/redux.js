@@ -46,3 +46,14 @@ export const actionCreator = (type, payload = {}) => ({
   type,
   payload: { ...payload }
 });
+
+export const combineReducers = reducers => {
+  return (state, action) => {
+    let newState = {};
+    Object.keys(reducers).forEach(domain => {
+      let obj = state ? state[domain] : undefined;
+      newState[domain] = reducers[domain](obj, action);
+    });
+    return newState;
+  };
+};
